@@ -8,14 +8,13 @@ import os
 # arguments:
 # path is a string describing the path
 # suffix is a string describing the file type (ie '.h')
-def collect_filenames(path, suffix):
-    files = []
-    # r=root, d=directories, f = files
-    for r, d, f in os.walk(path):
-        for file in f:
+def collect_file_names(path, suffix):
+    file_names_with_path = []
+    for root, directories, file_names in os.walk(path):
+        for file in file_names:
             if suffix in file:
-                files.append(os.path.join(r, file))
-    return files
+                file_names_with_path.append(os.path.join(root, file))
+    return file_names_with_path
 
 
 # This is the "main"
@@ -29,7 +28,7 @@ if len(sys.argv) != 3:
 else:
     print("Starting..")
     # TODO: processing here
-    files = collect_filenames(sys.argv[1], '.py')
+    files = collect_file_names(sys.argv[1], '.py')
     for f in files:
         print(f)
     print("Done.  Output is in ", sys.argv[2])
