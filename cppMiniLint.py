@@ -1,6 +1,7 @@
 import sys
 import os
-
+#from minilint.parser import skycake
+from minilint.parser import *
 
 # creates a list of filenames in all the directoris below path
 # that are of filetype suffix
@@ -28,7 +29,11 @@ if len(sys.argv) != 3:
 else:
     print("Starting..")
     # TODO: processing here
-    files = collect_file_names(sys.argv[1], '.py')
-    for f in files:
+    parser = Parser()
+    parser.headers = collect_file_names(sys.argv[1], '.h')
+    parser.cpp_files = collect_file_names(sys.argv[1], '.cpp')
+    for f in parser.headers:
+        print(f)
+    for f in parser.cpp_files:
         print(f)
     print("Done.  Output is in ", sys.argv[2])
