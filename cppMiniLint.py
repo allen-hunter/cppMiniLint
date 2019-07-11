@@ -5,7 +5,7 @@ from minilint.parser import *
 
 # todo: ifzero test
 # todo: config file
-# todo: test codebase
+
 
 # creates a list of filenames in all the directoris below path
 # that are of filetype suffix
