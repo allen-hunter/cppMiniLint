@@ -11,13 +11,32 @@ class Parser:
         # private
         self.__testchain = []
 
-    def parse(self):
+    def parse_all_files(self):
         for header in self.headers:
+            self.announce_new_filename(header)
             file = open(header, "r")
-            self.__readline(file)
+            self.__read_lines(file, True)
         for cpp in self.cpp_files:
-            self.__readline(file)
+            self.announce_new_filename(cpp)
+            self.__read_lines(file, False)
 
-    def __readline(self, file):
+    def __read_lines(self, file, file_is_header):
         for line in file:
-            print("todo: readline")
+            if file_is_header:
+                self.announce_new_header_line(line)
+            else:
+                self.announce_new_cpp_line(line)
+
+    # notifying functions for observers
+
+    def announce_new_filename(self, filename):
+        pass
+
+    def announce_new_header_line(self, line):
+        pass
+
+    def announce_new_cpp_line(self, line):
+        pass
+
+    def announce_new_filename(self, line):
+        pass

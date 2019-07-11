@@ -3,12 +3,18 @@ import os
 #from minilint.parser import skycake
 from minilint.parser import *
 
+# todo: ifzero test
+# todo: config file
+# todo: test codebase
+
 # creates a list of filenames in all the directoris below path
 # that are of filetype suffix
 #
 # arguments:
 # path is a string describing the path
 # suffix is a string describing the file type (ie '.h')
+
+
 def collect_file_names(path, suffix):
     file_names_with_path = []
     for root, directories, file_names in os.walk(path):
@@ -16,6 +22,11 @@ def collect_file_names(path, suffix):
             if suffix in file:
                 file_names_with_path.append(os.path.join(root, file))
     return file_names_with_path
+
+
+def print_report(file_name):
+    #todo: get report and put it in file_name
+    pass
 
 
 # This is the "main"
@@ -27,13 +38,11 @@ def collect_file_names(path, suffix):
 if len(sys.argv) != 3:
     print("usage: cppMiniLint.py directory outputfilename")
 else:
-    print("Starting..")
-    # TODO: processing here
+    print("Starting...")
     parser = Parser()
     parser.headers = collect_file_names(sys.argv[1], '.h')
     parser.cpp_files = collect_file_names(sys.argv[1], '.cpp')
-    for f in parser.headers:
-        print(f)
-    for f in parser.cpp_files:
-        print(f)
+    #todo: initialize test chain
+    parser.parse_all_files()
+    print_report(sys.argv[2])
     print("Done.  Output is in ", sys.argv[2])
