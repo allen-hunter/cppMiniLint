@@ -3,6 +3,11 @@
 
 
 class Test:
+    # this introduces a bit of incoherence.  Consider decomposing.
+    def produce_report(self):
+        pass
+
+# for the observer pattern
     def receive_new_header_line(self):
         pass
 
