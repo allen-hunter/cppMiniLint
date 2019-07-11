@@ -8,17 +8,17 @@ class Parser:
         # public
         self.headers = []
         self.cpp_files = []
-        # private
-        self.__testchain = []
 
     def parse_all_files(self):
         for header in self.headers:
-            self.announce_new_filename(header)
-            file = open(header, "r")
-            self.__read_lines(file, True)
+            self.__parse_file(header, True)
         for cpp in self.cpp_files:
-            self.announce_new_filename(cpp)
-            self.__read_lines(file, False)
+            self.__parse_file(cpp, False)
+
+    def __parse_file(self, file, file_is_header):
+        self.announce_new_filename(file)
+        file = open(file, "r")
+        self.__read_lines(file, file_is_header)
 
     def __read_lines(self, file, file_is_header):
         for line in file:
@@ -28,7 +28,6 @@ class Parser:
                 self.announce_new_cpp_line(line)
 
     # notifying functions for observers
-
     def announce_new_filename(self, filename):
         pass
 
