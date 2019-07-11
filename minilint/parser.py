@@ -37,6 +37,3 @@ class Parser:
 
     def announce_new_cpp_line(self, line):
         pass
-
-    def announce_new_filename(self, line):
-        pass
