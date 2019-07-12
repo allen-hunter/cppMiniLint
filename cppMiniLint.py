@@ -1,8 +1,7 @@
 import sys
 import os
 from minilint.parser import *
-
-# todo: ifzero test
+from minilint.code_tests.ifzero import *
 # todo: config file
 
 
@@ -41,6 +40,7 @@ else:
     parser = Parser()
     parser.headers = collect_file_names(sys.argv[1], '.h')
     parser.cpp_files = collect_file_names(sys.argv[1], '.cpp')
+    parser.test_suite.tests_to_run.append(IfZero())
     parser.parse_all_files()
     print_report(sys.argv[2])
     print("Done.  Output is in ", sys.argv[2])
