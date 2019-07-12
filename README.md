@@ -4,8 +4,11 @@ A tool for evaluating a large cpp code base for prioritized refactoring opportun
 cppMiniLint crawls through a codebase and generates a report of files and violations of good programming practice.
 
 *More specifically it is a testing framework that allows for easy addition of new tests, customizeable parsers, and customizeable reporting.*
+### Current Status:
+End to end functionality demonstrated, with one test implemented.  Current focus remains on refactoring the framework until
+I am satisfied that it is satisfies the open-closed principle.
 
-Current Tests:
+### Current Tests:
 - Detection of code blocks commented out with #if 0 preprocessor commands
 
 ## RoadMap:
