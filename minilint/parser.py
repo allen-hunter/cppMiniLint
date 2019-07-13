@@ -25,6 +25,7 @@ class Parser(object):
         self.announce_new_filename(file)
         file = open(file, "r")
         self.__read_lines(file, file_is_header)
+        file.close()
 
     def __read_lines(self, file, file_is_header):
         for line in file:
