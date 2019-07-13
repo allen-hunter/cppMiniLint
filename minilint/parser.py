@@ -3,6 +3,9 @@ from minilint.testsuite import *
 # It is responsible for parsing through header and implementation files
 # and notifying tests of c++ entities for evaluation
 
+# todo: consider abstracting this into a base class
+# todo: think of using an observer pattern to loosen the coupling to testsuite
+
 
 class Parser(object):
 
@@ -31,6 +34,7 @@ class Parser(object):
                 self.announce_new_cpp_line(line)
 
     # notifying functions for observers
+    # todo: consider using polymorphism to allow a single function to handle all messages
     def announce_new_filename(self, filename):
         self.test_suite.receive_new_filename(filename)
 

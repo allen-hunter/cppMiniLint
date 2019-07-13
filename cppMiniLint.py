@@ -22,9 +22,11 @@ def collect_file_names(path, suffix):
     return file_names_with_path
 
 
-def print_report(file_name):
-    #todo: get report and put it in file_name
-    pass
+def print_report(parser, file_name):
+    report = parser.test_suite.produce_report()
+    # print(report)
+    output_file = open(file_name, "w")
+    output_file.write(report)
 
 
 # This is the "main"
@@ -42,5 +44,5 @@ else:
     parser.cpp_files = collect_file_names(sys.argv[1], '.cpp')
     parser.test_suite.tests_to_run.append(IfZero())
     parser.parse_all_files()
-    print_report(sys.argv[2])
+    print_report(parser,sys.argv[2])
     print("Done.  Output is in ", sys.argv[2])

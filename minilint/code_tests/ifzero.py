@@ -4,6 +4,7 @@ import re
 
 class IfZero(Test):
     def __init__(self):
+        self.__regex = re.compile('#if\\s*\(*0', re.IGNORECASE)
         super(IfZero, self).__init__()
 
     # for the observer pattern
@@ -19,17 +20,11 @@ class IfZero(Test):
         super(IfZero, self).receive_new_filename(name)
 
     # methods for the test
-    def produce_report(self):
-        # todo: implement report
-        pass
-
     def __process_line(self, line):
-        if IfZero.string_contains_if_zero(line):
-            report_message = self._filename + " line " + str(self._line_number) + ": if zero"
-            super(IfZero, self).add_line_to_report(report_message)
+        if self.string_contains_if_zero(line):
+            self.report.add_message(self._filename, self._line_number, "if zero preprocessor instruction found")
 
-    def string_contains_if_zero(line):
-        regex = re.compile('#if\\s*\(*0', re.IGNORECASE)
-        if regex.search(line):
+    def string_contains_if_zero(self, line):
+        if self.__regex.search(line):
             return True
         return False
