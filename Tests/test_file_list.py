@@ -24,8 +24,23 @@ class TestFileList(unittest.TestCase):
 
     def test_load_directory(self):
         self.file_list.load_directory('testcpp')
-        self.assertTrue('testcpp\\Date.h' in self.file_list.headers)
-        self.assertTrue('testcpp\\Date.cpp' in self.file_list.cpp_files)
+        # finding files
+        self.assertEqual(self.file_list.headers.count('testcpp\\Date.h'), 1)
+        self.assertEqual(self.file_list.headers.count('testcpp\\A2DD.hpp'), 1)
+        self.assertEqual(self.file_list.cpp_files.count('testcpp\\Date.cpp'), 1)
+        self.assertEqual(self.file_list.cpp_files.count('testcpp\\A2DD.CPP'), 1)
+        self.assertEqual(self.file_list.cpp_files.count('testcpp\\cube.c'), 1)
+        # appending
+        original_size = len(self.file_list.headers)
+        self.file_list.load_directory('testcpp')
+        self.assertEqual(original_size*2, len(self.file_list.headers))
+        self.assertEqual(self.file_list.headers.count('testcpp\\Date.h'), 2)
+
+    def test_clear(self):
+        self.file_list.load_directory('testcpp')
+        self.assertTrue(len(self.file_list.headers) > 0)
+        self.file_list.clear()
+        self.assertEqual(len(self.file_list.headers), 0)
 
 
 if __name__ == '__main__':
