@@ -2,7 +2,8 @@ import os
 
 # a collection object for files for consideration
 
-class File_List(object):
+
+class FileList(object):
 
     def __init__(self):
         self.headers = []
@@ -29,4 +30,3 @@ class File_List(object):
             if str(file).lower().endswith(suffix):
                 return True
         return False
-    

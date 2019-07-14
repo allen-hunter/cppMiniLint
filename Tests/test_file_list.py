@@ -3,7 +3,7 @@ import os
 import unittest
 from unittest.mock import patch
 sys.path.append(os.path.join(sys.path[0],'cppMiniLint', 'sub', 'dir'))
-from minilint.file_list import File_List
+from minilint.filelist import FileList
 
 
 class TestFileList(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestFileList(unittest.TestCase):
         pass
 
     def setUp(self):  # runs before each test
-        self.file_list = File_List()
+        self.file_list = FileList()
 
     def tearDown(self):  # runs after each test
         pass
