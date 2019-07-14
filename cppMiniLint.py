@@ -27,7 +27,7 @@ def print_report(parser, file_name):
     # print(report)
     output_file = open(file_name, "w")
     output_file.write(report)
-
+    output_file.close()
 
 # This is the "main"
 # it should:
