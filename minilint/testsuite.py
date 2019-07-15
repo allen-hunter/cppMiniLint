@@ -24,8 +24,13 @@ class TestSuite(Test):
             if len(messages) > 0:
                 return_string += str(test.__class__) + ":\n"
             for message in messages:
-                return_string += "\tline " + str(message) + ": " \
-                        + str(messages[message]) + "\n"
+                return_string += self._format_message(message, messages[message])
+        return return_string
+
+    def _format_message(self, line_number, messages):
+        return_string = ""
+        for message in messages:
+            return_string += "\tline " + str(line_number) + ": " + str(message) + "\n"
         return return_string
 
     # for the observer pattern
