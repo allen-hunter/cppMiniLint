@@ -1,4 +1,5 @@
-from minilint.testsuite import *
+from minilint.testsuite import TestSuite
+from minilint.filelist import FileList
 # The Parser Class is the subject in an observer pattern.
 # It is responsible for parsing through header and implementation files
 # and notifying tests of c++ entities for evaluation
@@ -9,16 +10,15 @@ from minilint.testsuite import *
 
 class Parser(object):
 
-    def __init__(self):
+    def __init__(self, file_list_to_parse):
         # public
-        self.headers = []
-        self.cpp_files = []
+        self._file_list = file_list_to_parse
         self.test_suite = TestSuite()
 
     def parse_all_files(self):
-        for header in self.headers:
+        for header in self._file_list.headers:
             self.__parse_file(header, True)
-        for cpp in self.cpp_files:
+        for cpp in self._file_list.cpp_files:
             self.__parse_file(cpp, False)
 
     def __parse_file(self, file, file_is_header):

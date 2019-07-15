@@ -1,25 +1,11 @@
 import sys
 import os
-from minilint.parser import *
-from minilint.code_tests.ifzero import *
+# import architecture
+from minilint.parser import Parser
+from minilint.filelist import FileList
+# import tests
+from minilint.code_tests.ifzero import IfZero
 # todo: config file
-
-
-# creates a list of filenames in all the directoris below path
-# that are of filetype suffix
-#
-# arguments:
-# path is a string describing the path
-# suffix is a string describing the file type (ie '.h')
-
-
-def collect_file_names(path, suffix):
-    file_names_with_path = []
-    for root, directories, file_names in os.walk(path):
-        for file in file_names:
-            if suffix in file:
-                file_names_with_path.append(os.path.join(root, file))
-    return file_names_with_path
 
 
 def print_report(parser, file_name):
@@ -28,6 +14,7 @@ def print_report(parser, file_name):
     output_file = open(file_name, "w")
     output_file.write(report)
     output_file.close()
+
 
 # This is the "main"
 # it should:
@@ -39,9 +26,9 @@ if len(sys.argv) != 3:
     print("usage: cppMiniLint.py directory outputfilename")
 else:
     print("Starting...")
-    parser = Parser()
-    parser.headers = collect_file_names(sys.argv[1], '.h')
-    parser.cpp_files = collect_file_names(sys.argv[1], '.cpp')
+    files = FileList()
+    parser = Parser(files)
+    files.load_directory(sys.argv[1])
     parser.test_suite.tests_to_run.append(IfZero())
     parser.parse_all_files()
     print_report(parser,sys.argv[2])
