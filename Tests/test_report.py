@@ -33,5 +33,13 @@ class TestParser(unittest.TestCase):
         self.assertTrue('message_text' in self.report.issues['file_name']['line_number'])
         self.assertTrue('new message text' in self.report.issues['file_name']['line_number'])
 
+    def test_get_messages(self):
+        line_and_messages = self.report.get_messages('file_name')
+        self.assertEqual(len(line_and_messages), 0)
+        self.report.add_message('file_name', 'line_number', 'message 1')
+        self.report.add_message('file_name', 'line_number', 'message 2')
+        self.assertEqual(len(line_and_messages), 1)
+        self.assertEqual(len(line_and_messages['file_name']), 2)
+
 if __name__ == '__main__':
     unittest.main()
