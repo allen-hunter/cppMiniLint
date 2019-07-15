@@ -19,7 +19,7 @@ I am satisfied that it is satisfies the open-closed principle.
 - Documentation
 - Refactor observer pattern to be less tightly coupled
 - Refactor the communication between parsers and test suites to use a polymorphic message rather than explicit functions
-
+- Add a Weighting system to the report which allows you to assign a weight to a test, and then multiply that by the number of violations and the number of times the file is referenced
 ### Tests:
 - Detection of long files
 - Detection of long functions
