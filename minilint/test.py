@@ -8,7 +8,7 @@ class Test:
     def __init__(self):
         self._line_number = 0
         self._filename = ""
-        self.report = Report()  # todo: report should be a base class
+        self.report = Report()  # todo: we should be handed the report so that it can be polymorphic
 
     def produce_report(self):
         pass

@@ -1,10 +1,8 @@
 from minilint.testsuite import TestSuite
-from minilint.filelist import FileList
 # The Parser Class is the subject in an observer pattern.
 # It is responsible for parsing through header and implementation files
 # and notifying tests of c++ entities for evaluation
 
-# todo: consider abstracting this into a base class
 # todo: think of using an observer pattern to loosen the coupling to testsuite
 
 
