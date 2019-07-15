@@ -24,10 +24,10 @@ class TestSuite(Test):
             if len(messages) > 0:
                 return_string += str(test.__class__) + ":\n"
             for message in messages:
-                return_string += self._format_message(message, messages[message])
+                return_string += self._format_line_messages(message, messages[message])
         return return_string
 
-    def _format_message(self, line_number, messages):
+    def _format_line_messages(self, line_number, messages):
         return_string = ""
         for message in messages:
             return_string += "\tline " + str(line_number) + ": " + str(message) + "\n"
