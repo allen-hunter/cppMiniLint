@@ -14,7 +14,7 @@ class TestSuite(Test):
         for file_name in self.__file_names:
             report_for_file = self.get_file_report_from_all_tests(file_name)
             if len(report_for_file) > 0:
-                return_string += return_string + file_name + ":\n"+report_for_file
+                return_string += file_name + ":\n"+report_for_file
         return return_string
 
     def get_file_report_from_all_tests(self, file_name):
@@ -33,7 +33,7 @@ class TestSuite(Test):
             return_string += "\tline " + str(line_number) + ": " + str(message) + "\n"
         return return_string
 
-    # for the observer pattern
+    # for the observer pattern.  Inherited from test
     def receive_message(self, parser_message):
         if isinstance(parser_message, NewFile):
             self.__file_names.append(parser_message.file_name)

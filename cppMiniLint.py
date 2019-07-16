@@ -5,7 +5,6 @@ from minilint.parser import Parser
 from minilint.filelist import FileList
 # import tests
 from minilint.code_tests.ifzero import IfZero
-# todo: config file
 
 
 def print_report(parser, file_name):
