@@ -41,5 +41,13 @@ class TestParser(unittest.TestCase):
         self.assertEqual(len(line_and_messages), 1)
         self.assertEqual(len(line_and_messages['line_number']), 2)
 
+    def test_get_message(self):
+        messages = self.report.get_message('file_name', 'line_number')
+        self.assertEqual(len(messages), 0)
+        self.report.add_message('file_name', 'line_number', 'message 1')
+        self.report.add_message('file_name', 'line_number', 'message 2')
+        self.assertEqual(len(messages), 2)  # interesting that we can count this even though
+                                            # we asked for it when the dict was empty
+
 if __name__ == '__main__':
     unittest.main()
