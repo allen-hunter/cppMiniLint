@@ -1,4 +1,5 @@
-from minilint.report import *
+from minilint.report import Report
+from minilint.parser_message import *
 
 # abstract base class (interface) for tests.  Follows the observer pattern with the intention
 # of using parser as the subject.  Every code test should inherit from this class
@@ -14,6 +15,11 @@ class Test:
         pass
 
 # for the observer pattern
+    #general message
+    def receive_message(self, parser_message):
+        print(isinstance(parser_message, NewFile))
+        print(parser_message.file_name)
+
     def receive_new_header_line(self, line):
         self._line_number += 1
 
