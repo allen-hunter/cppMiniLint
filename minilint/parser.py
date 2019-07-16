@@ -4,8 +4,6 @@ from minilint.parser_message import *
 # It is responsible for parsing through header and implementation files
 # and notifying tests of c++ entities for evaluation
 
-# todo: think of using an observer pattern to loosen the coupling to testsuite
-
 
 class Parser(object):
 
@@ -16,31 +14,16 @@ class Parser(object):
 
     def parse_all_files(self):
         for header in self._file_list.headers:
-            self.__parse_file(header, True)
+            self._parse_file(header, True)
         for cpp in self._file_list.cpp_files:
-            self.__parse_file(cpp, False)
+            self._parse_file(cpp, False)
 
-    def __parse_file(self, file, file_is_header):
-        self.announce_new_filename(file)
+    def _parse_file(self, file, file_is_header):
         self.test_suite.receive_message(NewFile(file))
         file = open(file, "r")
-        self.__read_lines(file, file_is_header)
+        self._read_lines(file, file_is_header)
         file.close()
 
-    def __read_lines(self, file, file_is_header):
+    def _read_lines(self, file, file_is_header):
         for line in file:
-            if file_is_header:
-                self.announce_new_header_line(line)
-            else:
-                self.announce_new_cpp_line(line)
-
-    # notifying functions for observers
-    # todo: consider using polymorphism to allow a single function to handle all messages
-    def announce_new_filename(self, filename):
-        self.test_suite.receive_new_filename(filename)
-
-    def announce_new_header_line(self, line):
-        self.test_suite.receive_new_header_line(line)
-
-    def announce_new_cpp_line(self, line):
-        self.test_suite.receive_new_cpp_line(line)
+            self.test_suite.receive_message(LineFromFile(file_is_header,line))

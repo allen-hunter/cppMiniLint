@@ -8,16 +8,10 @@ class IfZero(Test):
         super(IfZero, self).__init__()
 
     # for the observer pattern
-    def receive_new_header_line(self, line):
-        super(IfZero, self).receive_new_header_line(line)
-        self.__process_line(line)
-
-    def receive_new_cpp_line(self, line):
-        super(IfZero, self).receive_new_cpp_line(line)
-        self.__process_line(line)
-
-    def receive_new_filename(self, name):
-        super(IfZero, self).receive_new_filename(name)
+    def receive_message(self, parser_message):
+        super(IfZero, self).receive_message(parser_message)
+        if isinstance(parser_message, LineFromFile):
+            self.__process_line(parser_message.line_text)
 
     # methods for the test
     def __process_line(self, line):

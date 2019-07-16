@@ -17,15 +17,10 @@ class Test:
 # for the observer pattern
     #general message
     def receive_message(self, parser_message):
-        print(isinstance(parser_message, NewFile))
-        print(parser_message.file_name)
+        if isinstance(parser_message, NewFile):
+            self._filename = parser_message.file_name
+            self._line_number = 0
+        elif isinstance(parser_message, LineFromFile):
+            self._line_number += 1
 
-    def receive_new_header_line(self, line):
-        self._line_number += 1
 
-    def receive_new_cpp_line(self, line):
-        self._line_number += 1
-
-    def receive_new_filename(self, name):
-        self._filename = name
-        self._line_number = 0

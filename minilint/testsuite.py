@@ -34,15 +34,8 @@ class TestSuite(Test):
         return return_string
 
     # for the observer pattern
-    def receive_new_header_line(self, line):
+    def receive_message(self, parser_message):
+        if isinstance(parser_message, NewFile):
+            self.__file_names.append(parser_message.file_name)
         for test in self.tests_to_run:
-            test.receive_new_header_line(line)
-
-    def receive_new_cpp_line(self, line):
-        for test in self.tests_to_run:
-            test.receive_new_cpp_line(line)
-
-    def receive_new_filename(self, name):
-        self.__file_names.append(name)
-        for test in self.tests_to_run:
-            test.receive_new_filename(name)
+            test.receive_message(parser_message)
