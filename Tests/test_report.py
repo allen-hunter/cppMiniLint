@@ -39,7 +39,7 @@ class TestParser(unittest.TestCase):
         self.report.add_message('file_name', 'line_number', 'message 1')
         self.report.add_message('file_name', 'line_number', 'message 2')
         self.assertEqual(len(line_and_messages), 1)
-        self.assertEqual(len(line_and_messages['file_name']), 2)
+        self.assertEqual(len(line_and_messages['line_number']), 2)
 
 if __name__ == '__main__':
     unittest.main()
