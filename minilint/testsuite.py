@@ -8,33 +8,14 @@ class TestSuite(Test):
         self.__file_names = []
         super(TestSuite, self).__init__()
 
-    #todo: this detracts from class coherence.  solve that.
     def produce_report(self):
-        return_string = ""
-        for file_name in self.__file_names:
-            report_for_file = self.get_file_report_from_all_tests(file_name)
-            if len(report_for_file) > 0:
-                return_string += file_name + ":\n"+report_for_file
-        return return_string
-
-    def get_file_report_from_all_tests(self, file_name):
-        return_string = ""
         for test in self.tests_to_run:
-            messages = test.report.get_messages(file_name)
-            if len(messages) > 0:
-                return_string += str(test.__class__) + ":\n"
-            for message in messages:
-                return_string += self._format_line_messages(message, messages[message])
-        return return_string
-
-    def _format_line_messages(self, line_number, messages):
-        return_string = ""
-        for message in messages:
-            return_string += "\tline " + str(line_number) + ": " + str(message) + "\n"
-        return return_string
+            self.report += test.report
+        return self.report.produce_report()
 
     # for the observer pattern.  Inherited from test
     def receive_message(self, parser_message):
+        super(TestSuite, self).receive_message(parser_message)
         if isinstance(parser_message, NewFile):
             self.__file_names.append(parser_message.file_name)
         for test in self.tests_to_run:

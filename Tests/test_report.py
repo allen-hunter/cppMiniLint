@@ -23,6 +23,13 @@ class TestParser(unittest.TestCase):
     def tearDown(self):  # runs after each test
         pass
 
+    def test_iadd(self):
+        other_report = Report()
+        self.report.add_message('file_name', '2', 'message_text_1')
+        other_report.add_message('file_name', '2', 'message_text_2')
+        self.report += other_report
+        self.assertEqual(self.report.issues['file_name']['2'], ['message_text_1', 'message_text_2'])
+
     def test_add_message(self):
         self.report.add_message('file_name', 'line_number', 'message_text')
         self.assertTrue('file_name' in self.report.issues)
@@ -48,6 +55,11 @@ class TestParser(unittest.TestCase):
         self.report.add_message('file_name', 'line_number', 'message 2')
         self.assertEqual(len(messages), 2)  # interesting that we can count this even though
                                             # we asked for it when the dict was empty
+
+    def test_produce_report(self):
+        self.report.add_message('file_name', 'line_number', 'message_text')
+        report_text = self.report.produce_report()
+        self.assertEqual(report_text, 'file_name\n\tline: line_number\n\t\tmessage_text\n')
 
 if __name__ == '__main__':
     unittest.main()
