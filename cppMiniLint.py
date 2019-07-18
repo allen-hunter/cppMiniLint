@@ -5,6 +5,7 @@ from minilint.parser import Parser
 from minilint.filelist import FileList
 # import tests
 from minilint.code_tests.if_zero import IfZero
+from minilint.code_tests.too_long import TooLong
 
 
 def print_report(parser, file_name):
@@ -14,6 +15,10 @@ def print_report(parser, file_name):
     output_file.write(report)
     output_file.close()
 
+
+def add_tests(parser):
+    parser.test_suite.tests_to_run.append(IfZero())
+    parser.test_suite.tests_to_run.append(TooLong())
 
 # This is the "main"
 # it should:
@@ -26,9 +31,9 @@ if len(sys.argv) != 3:
 else:
     print("Starting...")
     files = FileList()
-    parser = Parser(files)
     files.load_directory(sys.argv[1])
-    parser.test_suite.tests_to_run.append(IfZero())
+    parser = Parser(files)
+    add_tests(parser)
     parser.parse_all_files()
     print_report(parser,sys.argv[2])
     print("Done.  Output is in ", sys.argv[2])

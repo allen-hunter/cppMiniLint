@@ -11,7 +11,11 @@ class TooLong(Test):
         self._max_header_size = 300  # todo: pull from config
         self._max_cpp_size = 1000  # todo: pull from config
         self._max_size = 0
-        
+
+    def set_max_file_sizes(self, header_length, cpp_length):
+        self._max_header_size = header_length
+        self._max_cpp_size = cpp_length
+
     # for the observer pattern
     def receive_message(self, parser_message):
         super(TooLong, self).receive_message(parser_message)
