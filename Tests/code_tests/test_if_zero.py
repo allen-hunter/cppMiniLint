@@ -7,7 +7,7 @@ from minilint.code_tests.if_zero import IfZero
 from minilint.parser_message import *
 
 
-class TestParser(unittest.TestCase):
+class TestIfZero(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):  # runs at the beginning

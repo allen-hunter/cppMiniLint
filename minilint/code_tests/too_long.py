@@ -19,19 +19,17 @@ class TooLong(Test):
     # for the observer pattern
     def receive_message(self, parser_message):
         super(TooLong, self).receive_message(parser_message)
-        if isinstance(parser_message, NewFile):
-            self.__process_new_file(parser_message.file_name)
-        elif isinstance(parser_message, LineFromFile):
-            self.__process_line()
+        if isinstance(parser_message, EndOfFile):
+            self.__process_end_of_file(parser_message.file_name)
 
     # method for the test
-    def __process_line(self):
+    def __process_end_of_file(self, file_name):
+        self.__set_max_size_by_file_type(file_name)
         if self._line_number > self._max_size:
             error_message = "file has " + str(self._line_number - self._max_size) + " too many lines"
-            self.report.clear(self._filename)  # get rid of previous complaints by this test
             self.report.add_message(self._filename, self._line_number, error_message)
 
-    def __process_new_file(self, file_name):  # todo: use end of file instead
+    def __set_max_size_by_file_type(self, file_name):
         if self.__regex.search(file_name):
             self._max_size = self._max_header_size
         else:

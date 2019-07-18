@@ -7,7 +7,7 @@ from minilint.code_tests.too_long import TooLong
 from minilint.parser_message import *
 
 
-class TestParser(unittest.TestCase):
+class TestFileTooLong(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):  # runs at the beginning
@@ -38,16 +38,21 @@ class TestParser(unittest.TestCase):
     def test_process_line(self):
         new_file = NewFile("foo.h")
         new_line = LineFromFile(True, "this is a line from a header file")
+        end_of_file = EndOfFile("foo.h")
         self.too_long.receive_message(new_file)
         for i in range(310):
             self.too_long.receive_message(new_line)
+        self.too_long.receive_message(end_of_file)
         message = self.too_long.report.get_message("foo.h", 310)
         self.assertEqual(message, ['file has 10 too many lines'])
+
         new_file = NewFile("foo.cpp")
+        end_of_file = EndOfFile("foo.cpp")
         self.too_long.receive_message(new_file)
         new_line = LineFromFile(False, "this is a line from a cpp file")
         for i in range(1010):
             self.too_long.receive_message(new_line)
+        self.too_long.receive_message(end_of_file)
         message = self.too_long.report.get_message("foo.cpp", 1010)
         self.assertEqual(message, ['file has 10 too many lines'])
 

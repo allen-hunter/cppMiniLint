@@ -7,7 +7,7 @@ from minilint.test import Test
 from minilint.parser_message import *
 
 
-class TestParser(unittest.TestCase):
+class TestTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):  # runs at the beginning

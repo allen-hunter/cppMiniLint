@@ -28,6 +28,7 @@ class TestParser(unittest.TestCase):
     def test_parse_all_files(self):
         self.file_list.add_file('testcpp\Date.h')
         self.file_list.add_file('testcpp\Date.cpp')
+        # todo: differentiate between newfile and endoffile
         with patch('minilint.parser.Parser._parse_file') as mocked_parse_file:
             self.parser.parse_all_files()
             mocked_parse_file.assert_any_call('testcpp\Date.h', True)

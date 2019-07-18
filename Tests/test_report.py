@@ -6,7 +6,7 @@ sys.path.append(os.path.join(sys.path[0],'cppMiniLint', 'sub', 'dir'))
 from minilint.report import Report
 
 
-class TestParser(unittest.TestCase):
+class TestReport(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):  # runs at the beginning
