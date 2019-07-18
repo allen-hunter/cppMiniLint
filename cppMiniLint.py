@@ -6,6 +6,7 @@ from minilint.filelist import FileList
 # import tests
 from minilint.code_tests.if_zero import IfZero
 from minilint.code_tests.too_long import TooLong
+from minilint.code_tests.no_copyright import NoCopyright
 
 
 def print_report(parser, file_name):
@@ -19,6 +20,7 @@ def print_report(parser, file_name):
 def add_tests(parser):
     parser.test_suite.tests_to_run.append(IfZero())
     parser.test_suite.tests_to_run.append(TooLong())
+    parser.test_suite.tests_to_run.append(NoCopyright())
 
 # This is the "main"
 # it should:

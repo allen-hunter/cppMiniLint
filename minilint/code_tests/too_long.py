@@ -31,7 +31,7 @@ class TooLong(Test):
             self.report.clear(self._filename)  # get rid of previous complaints by this test
             self.report.add_message(self._filename, self._line_number, error_message)
 
-    def __process_new_file(self, file_name):
+    def __process_new_file(self, file_name):  # todo: use end of file instead
         if self.__regex.search(file_name):
             self._max_size = self._max_header_size
         else:

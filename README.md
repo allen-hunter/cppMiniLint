@@ -9,11 +9,13 @@ good programming practice.
 customizeable parsers, and customizeable reporting.*
 
 ### Current Status:
-End to end functionality demonstrated, with one test implemented.  Current focus remains on refactoring the framework until
-I am satisfied that it is satisfies the open-closed principle.
+Two tests implemented.  Current focus will be on improving the parser to use castxml to
+better process cpp, allowing more sophisticated testing
 
 ### Current Tests:
 - Detection of code blocks commented out with #if 0 preprocessor commands
+- Detection of long files
+- Detection of uncopyrighted files
 
 ## RoadMap:
 ### Unit Testing
@@ -27,15 +29,15 @@ I am satisfied that it is satisfies the open-closed principle.
 - Extend parser with pygccxml
 
 ### Tests:
-- Detection of long files
-- Detection of uncopywrited files
 - Detection of header protection (ie pragma once or ifdefs)
 - Detection of multiple classes within a single header
 - Detection of long functions <sup>1</sup>
 - Detection of large classes <sup>1</sup>
 - Detection of unsearchable names <sup>1</sup>
-- Detection of symbols that don't have a component in the english language <sup>1</sup>
+- Detection of symbols that don't have a component in the english language <sup>1</sup><sup>,2</sup>
+- Detection of unused include files
 
 1: should occur after pygccxml is incorportated into the parser
+2: should occur after 
 ### Reporting:
 - Files in report organized by a "badness rating" which is a product of weighted test violations multiplied by the frequency of references to that file, so that you can focus efforts on the dirtiest code most likely to be read by other programmers

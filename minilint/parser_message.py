@@ -18,3 +18,8 @@ class LineFromFile(ParserMessage):
 class NewFile(ParserMessage):
     def __init__(self, file_name):
         self.file_name = file_name
+
+# issued when end of file reached
+class EndOfFile(ParserMessage):
+    def __init__(self, file_name):
+        self.file_name = file_name

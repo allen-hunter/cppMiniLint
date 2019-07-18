@@ -18,11 +18,12 @@ class Parser(object):
         for cpp in self._file_list.cpp_files:
             self._parse_file(cpp, False)
 
-    def _parse_file(self, file, file_is_header):
-        self.test_suite.receive_message(NewFile(file))
-        file = open(file, "r")
+    def _parse_file(self, file_name, file_is_header):
+        self.test_suite.receive_message(NewFile(file_name))
+        file = open(file_name, "r")
         self._read_lines(file, file_is_header)
         file.close()
+        self.test_suite.receive_message(EndOfFile(file_name))
 
     def _read_lines(self, file, file_is_header):
         for line in file:

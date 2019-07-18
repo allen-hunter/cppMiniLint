@@ -36,7 +36,7 @@ class Report:
 
     def _produce_report_of_files(self):
         return_string = ""
-        for file in self.issues:
+        for file in sorted (self.issues):
             report_from_file = self._produce_report_of_lines(file)
             return_string += self.format_if_has_content(str(file)+"\n", report_from_file, "")
         return return_string
@@ -47,7 +47,7 @@ class Report:
 
     def _produce_report_of_lines(self, file):
         return_string = ""
-        for line_number in self.issues[file]:
+        for line_number in sorted (self.issues[file]):
             report_from_line = self._produce_report_of_messages(file, line_number)
             return_string += self.format_if_has_content("\tline: " + str(line_number) +"\n", report_from_line, "")
         return return_string
