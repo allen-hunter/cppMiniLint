@@ -4,7 +4,7 @@ import os
 from minilint.parser import Parser
 from minilint.filelist import FileList
 # import tests
-from minilint.code_tests.ifzero import IfZero
+from minilint.code_tests.if_zero import IfZero
 
 
 def print_report(parser, file_name):

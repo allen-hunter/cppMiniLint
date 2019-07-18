@@ -55,6 +55,15 @@ class TestParser(unittest.TestCase):
         self.report.add_message('file_name', 'line_number', 'message 2')
         self.assertEqual(len(messages), 2)  # interesting that we can count this even though
                                             # we asked for it when the dict was empty
+    def test_clear(self):
+        messages = self.report.get_message('file_name', 'line_number')
+        self.assertEqual(len(messages), 0)
+        self.report.add_message('file_name', 'line_number', 'message 1')
+        self.report.add_message('file_name', 'line_number', 'message 2')
+        self.assertEqual(len(messages), 2)
+        self.report.clear('file_name')
+        messages = self.report.get_message('file_name', 'line_number')
+        self.assertEqual(len(messages), 0)
 
     def test_produce_report(self):
         self.report.add_message('file_name', 'line_number', 'message_text')

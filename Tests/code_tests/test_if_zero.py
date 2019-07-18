@@ -3,7 +3,7 @@ import os
 import unittest
 from unittest.mock import patch
 sys.path.append(os.path.join(sys.path[0], 'cppMiniLint', 'sub', 'dir'))
-from minilint.code_tests.ifzero import IfZero
+from minilint.code_tests.if_zero import IfZero
 from minilint.parser_message import *
 
 

@@ -15,6 +15,9 @@ class Report:
     def get_message(self, file_name, line_number):
         return self.issues[file_name][line_number]  # returns [messages]
 
+    def clear(self, file_name):
+        self.issues[file_name].clear()
+
     def __iadd__(self, other):  # += operator overrride
         for file_name in other.issues:
             self._add_lines(other, file_name)

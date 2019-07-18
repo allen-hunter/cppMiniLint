@@ -1,0 +1,10 @@
+
+venv2/
+
+minilint/__pycache__/
+
+minilint/code_tests/__pycache__/
+
+output\.txt
+
+\.idea/
