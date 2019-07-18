@@ -29,6 +29,8 @@ I am satisfied that it is satisfies the open-closed principle.
 ### Tests:
 - Detection of long files
 - Detection of uncopywrited files
+- Detection of header protection (ie pragma once or ifdefs)
+- Detection of multiple classes within a single header
 - Detection of long functions <sup>1</sup>
 - Detection of large classes <sup>1</sup>
 - Detection of unsearchable names <sup>1</sup>
