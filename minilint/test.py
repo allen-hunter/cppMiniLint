@@ -22,5 +22,5 @@ class Test:
             self._line_number = 0
         elif isinstance(parser_message, LineFromFile):
             self._line_number += 1
-
-
+        elif isinstance(parser_message, EndOfFile):
+            self.report.finish_file(parser_message.file_name, self.__class__.__name__)

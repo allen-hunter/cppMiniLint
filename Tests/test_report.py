@@ -25,10 +25,13 @@ class TestReport(unittest.TestCase):
 
     def test_iadd(self):
         other_report = Report()
-        self.report.add_message('file_name', '2', 'message_text_1')
-        other_report.add_message('file_name', '2', 'message_text_2')
+        self.report.add_message('file_name.h', '2', 'message_text_1')
+        self.report.finish_file('file_name.h', 'test 1')
+        other_report.add_message('file_name.h', '2', 'message_text_2')
+        other_report.finish_file('file_name.h', 'test 2')
         self.report += other_report
-        self.assertEqual(self.report.issues['file_name']['2'], ['message_text_1', 'message_text_2'])
+        self.assertEqual(self.report.issues['file_name.h']['2'], ['message_text_1', 'message_text_2'])
+        self.assertEqual(self.report.scores['test 2']['file_name.h'], 1)
 
     def test_add_message(self):
         self.report.add_message('file_name', 'line_number', 'message_text')
@@ -70,5 +73,16 @@ class TestReport(unittest.TestCase):
         report_text = self.report.produce_report()
         self.assertEqual(report_text, 'file_name\n\tline: line_number\n\t\tmessage_text\n')
 
+    def test_remove_path(self):
+        file_sans_path = self.report._remove_path('foo.h')
+        self.assertEqual(file_sans_path, 'foo.h')
+        file_sans_path = self.report._remove_path('baz\\bar\\foo.h')
+        self.assertEqual(file_sans_path, 'foo.h')
+
+    def test_finish_file(self):
+        self.report.add_message('\\foo\\bar\\file_name.h', 'line_number', 'message 1')
+        self.report.add_message('\\foo\\bar\\file_name.h', 'line_number', 'message 2')
+        self.report.finish_file('\\foo\\bar\\file_name.h', 'test')
+        self.assertEqual(self.report.scores['test']['file_name.h'], 2)
 if __name__ == '__main__':
     unittest.main()

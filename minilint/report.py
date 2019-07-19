@@ -1,11 +1,18 @@
 import collections
+import os
 
+# storage class and report generation
 
-# storage class for test output
 class Report:
     def __init__(self):
-        self.issues = collections.defaultdict(lambda: collections.defaultdict(list))  # 2 dimensional dictionary, file[line:[messages]]
+        self.issues = collections.defaultdict(
+            lambda: collections.defaultdict(list))  # 2 dimensional dictionary, file[line:[messages]]
+        self.scores = collections.defaultdict(
+            lambda: collections.defaultdict(int))  # 2 dimensional dictionary, file[test:score]
+        self.references = {}  # dictionary of name(str):refcount(int
+        self.weight = 1.0  # test multiplies number of errors against this to get its badness score
 
+# storage methods
     def add_message(self, file_name, line_number, message):
         self.issues[file_name][line_number].append(message)  # you can have multiple messages per line
 
@@ -21,6 +28,7 @@ class Report:
     def __iadd__(self, other):  # += operator overrride
         for file_name in other.issues:
             self._add_lines(other, file_name)
+            self.scores.update(other.scores)
         return self
 
     def _add_lines(self, other, file_name):
@@ -31,6 +39,16 @@ class Report:
         for message in other.issues[file_name][line_number]:
             self.issues[file_name][line_number].append(message)
 
+    def _remove_path(self, file_name_with_path):
+        dir_name, file_name = os.path.split(file_name_with_path)
+        return file_name
+
+    def finish_file(self, file_name_with_path, test):
+        file_name = self._remove_path(file_name_with_path)
+        for line in self.issues[file_name_with_path]:
+            self.scores[test][file_name] += (len(self.issues[file_name_with_path][line]) * self.weight)
+
+# report generation methods
     def produce_report(self):
         return self._produce_report_of_files()
 
