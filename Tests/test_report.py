@@ -84,5 +84,22 @@ class TestReport(unittest.TestCase):
         self.report.add_message('\\foo\\bar\\file_name.h', 'line_number', 'message 2')
         self.report.finish_file('\\foo\\bar\\file_name.h', 'test')
         self.assertEqual(self.report.scores['test']['file_name.h'], 2)
+
+    def test_sort_by_reference_and_weight(self):
+        self.report.add_message('\\foo\\bar\\file_name.h', 'line_number', 'message 1')
+        self.report.add_message('\\foo\\bar\\file_name.h', 'line_number', 'message 2')
+        self.report.finish_file('\\foo\\bar\\file_name.h', 'test')
+        self.report.add_message('\\foo\\bar\\file_name.cpp', 'line_number', 'message 1')
+        self.report.add_message('\\foo\\bar\\file_name.cpp', 'line_number', 'message 2')
+        self.report.add_message('\\foo\\bar\\file_name.cpp', 'line_number', 'message 3')
+        self.report.finish_file('\\foo\\bar\\file_name.cpp', 'test')
+        self.assertEqual(self.report.sort_by_reference_and_weight('file_name.cpp'), 3)
+        self.report.add_reference('file_name.cpp')
+        self.assertEqual(self.report.sort_by_reference_and_weight('file_name.cpp'), 6)
+        file_list = ['\\foo\\bar\\file_name.h', '\\foo\\bar\\file_name.cpp']
+        sorted_list = sorted(file_list, key=lambda file: self.report.sort_by_reference_and_weight(file), reverse=True)
+        self.assertEqual(sorted_list, ['\\foo\\bar\\file_name.cpp', '\\foo\\bar\\file_name.h'])
+
+
 if __name__ == '__main__':
     unittest.main()

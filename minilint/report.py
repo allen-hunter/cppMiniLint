@@ -1,6 +1,5 @@
 import collections
 import os
-
 # storage class and report generation
 
 class Report:
@@ -26,9 +25,9 @@ class Report:
         self.issues[file_name].clear()
 
     def __iadd__(self, other):  # += operator overrride
+        self.scores.update(other.scores)
         for file_name in other.issues:
             self._add_lines(other, file_name)
-            self.scores.update(other.scores)
         return self
 
     def _add_lines(self, other, file_name):
@@ -43,18 +42,32 @@ class Report:
         dir_name, file_name = os.path.split(file_name_with_path)
         return file_name
 
+    def add_reference(self, file_name_with_path):
+        file_name_sans_path = self._remove_path(file_name_with_path)
+        self.references[file_name_sans_path] = self.references.get(file_name_sans_path, 0) + 1
+
     def finish_file(self, file_name_with_path, test):
-        file_name = self._remove_path(file_name_with_path)
+        file_name_sans_path = self._remove_path(file_name_with_path)
         for line in self.issues[file_name_with_path]:
-            self.scores[test][file_name] += (len(self.issues[file_name_with_path][line]) * self.weight)
+            self.scores[test][file_name_sans_path] += (len(self.issues[file_name_with_path][line]) * self.weight)
 
 # report generation methods
     def produce_report(self):
         return self._produce_report_of_files()
 
+    def sort_by_reference_and_weight(self, file_name_with_path):
+        file_name_sans_path = self._remove_path(file_name_with_path)
+        references = 1 + self.references.get(file_name_sans_path, 0)
+        combined_weight = 0
+        for test in self.scores:
+            combined_weight += self.scores[test][file_name_sans_path]
+        print(file_name_sans_path + " : " + str(combined_weight))
+        return combined_weight * references
+
     def _produce_report_of_files(self):
         return_string = ""
-        for file in sorted (self.issues):
+        # dirtiest files first
+        for file in sorted(self.issues, key=lambda file: self.sort_by_reference_and_weight(file), reverse=True):
             report_from_file = self._produce_report_of_lines(file)
             return_string += self.format_if_has_content(str(file)+"\n", report_from_file, "")
         return return_string
