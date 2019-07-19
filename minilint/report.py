@@ -61,7 +61,6 @@ class Report:
         combined_weight = 0
         for test in self.scores:
             combined_weight += self.scores[test][file_name_sans_path]
-        print(file_name_sans_path + " : " + str(combined_weight))
         return combined_weight * references
 
     def _produce_report_of_files(self):
