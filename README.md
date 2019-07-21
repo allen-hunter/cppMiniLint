@@ -28,7 +28,10 @@ better process cpp, allowing more sophisticated testing
 - Documentation
 - Improve customization of the test run by using a config file that can be overridden via
   command line switches
-- Extend parser with pygccxml
+
+### Parser:
+- Incorporate pygccxml
+- symbol detection within member functions (this is not provided by pygccxml/castxml)
 
 ### Tests:
 - Detection of header protection (ie pragma once or ifdefs)
@@ -40,4 +43,4 @@ better process cpp, allowing more sophisticated testing
 - Detection of unused include files
 
 1: should occur after pygccxml is incorportated into the parser
-2: should occur after 
+2: should occur after folding in NLTK or SDict
