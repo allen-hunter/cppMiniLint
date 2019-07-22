@@ -36,11 +36,14 @@ better process cpp, allowing more sophisticated testing
 ### Tests:
 - Detection of header protection (ie pragma once or ifdefs)
 - Detection of multiple classes within a single header
-- Detection of long functions <sup>1</sup>
+- Detection of large comment blocks within member functions (commented out code)
+- Detection of long functions 
 - Detection of large classes <sup>1</sup>
-- Detection of unsearchable names <sup>1</sup>
-- Detection of symbols that don't have a component in the english language <sup>1</sup><sup>,2</sup>
+- Detection of unsearchable names <sup>1</sup><sup>, 2</sup>
+- Detection of symbols that don't have a component in the english language <sup>1</sup><sup>,3</sup>
 - Detection of unused include files
+- Detection of unused public class entities (functions, public member variables, etc...)
 
-1: should occur after pygccxml is incorportated into the parser
-2: should occur after folding in NLTK or SDict
+1: should occur after pygccxml is incorportated into the parser <BR>
+2: should occur after parser performs symbol detection within member functions<BR>
+3: should occur after folding in NLTK or SDict

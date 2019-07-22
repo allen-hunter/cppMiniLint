@@ -19,7 +19,22 @@ class NewFile(ParserMessage):
     def __init__(self, file_name):
         self.file_name = file_name
 
+
 # issued when end of file reached
 class EndOfFile(ParserMessage):
     def __init__(self, file_name):
         self.file_name = file_name
+
+
+class Variable(ParserMessage):
+    def __init__(self, name, var_type, value):
+        self.name = name
+        self.type = var_type
+        self.value = value
+
+
+class Class(ParserMessage):
+    def __init__(self, name, bases, deriveds):
+        self.name = name
+        self.bases = bases
+        self.deriveds = deriveds
