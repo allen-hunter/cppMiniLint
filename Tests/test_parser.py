@@ -34,6 +34,16 @@ class TestParser(unittest.TestCase):
             mocked_parse_file.assert_any_call('testcpp\Date.h', True)
             mocked_parse_file.assert_any_call('testcpp\Date.cpp', False)
 
+    def test_look_for_reference(self):
+        results = self.parser._look_for_reference("#INCLUDE <foo.h>")
+        self.assertEqual(results, 1, msg="basic < match")
+        results = self.parser._look_for_reference("#INCLUDE  <foo.h>")
+        self.assertEqual(results, 1, msg="< + spaces match")
+        results = self.parser._look_for_reference("#INCLUDE \"foo.h\"")
+        self.assertEqual(results, 1, msg="\" match")
+        results = self.parser._look_for_reference("#INCLUDE \"..\\foo.h\"")
+        self.assertEqual(results, 1, msg="\" with path match")
+
 
 if __name__ == '__main__':
     unittest.main()

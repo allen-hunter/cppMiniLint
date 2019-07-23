@@ -8,9 +8,6 @@ from minilint.code_tests.if_zero import IfZero
 from minilint.code_tests.too_long import TooLong
 from minilint.code_tests.no_copyright import NoCopyright
 
-# todo: remove and wrap in when working
-# print(global_namespace.variables()[3].name)
-# todo: end section to cleanup
 
 def print_report(parser, file_name):
     report = parser.test_suite.produce_report()
