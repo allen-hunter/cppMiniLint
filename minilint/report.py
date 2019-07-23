@@ -7,8 +7,8 @@ class Report:
         self.issues = collections.defaultdict(
             lambda: collections.defaultdict(list))  # 2 dimensional dictionary, file[line:[messages]]
         self.scores = collections.defaultdict(
-            lambda: collections.defaultdict(int))  # 2 dimensional dictionary, file[test:score]
-        self.references = {}  # dictionary of name(str):refcount(int
+            lambda: collections.defaultdict(int))   # 2 dimensional dictionary, file[test:score]
+        self.references = {}                        # dictionary of name(str):refcount(int
         self.weight = 1.0  # test multiplies number of errors against this to get its badness score
 
 # storage methods

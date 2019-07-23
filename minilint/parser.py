@@ -49,7 +49,7 @@ class Parser(object):
         for match in matches:
             match = re.sub("#include\s*[\"|\<]", "", match, flags=re.IGNORECASE)
             match = re.sub("[\"|\>]", "", match, flags=re.IGNORECASE)
-            match = ntpath.basename(match)
+            match = ntpath.basename(match)  # remove the path
             self.test_suite.report.add_reference(match)
         return len(matches)
 
@@ -60,6 +60,7 @@ class Parser(object):
         self._extract_classes(global_namespace)
 
     def _extract_variables(self, global_namespace):
+        # long argument because if you do not hand the last option a True, then it spouts warnings
         for var in global_namespace.variables(None, None, None, None, None, None, True):
             self.test_suite.receive_message(Variable(var.name, var.decl_type, var.value))
 

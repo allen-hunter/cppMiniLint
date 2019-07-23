@@ -9,7 +9,7 @@ class Test:
     def __init__(self):
         self._line_number = 0
         self._filename = ""
-        self.report = Report()  # todo: we should be handed the report so that it can be polymorphic
+        self.report = Report()
 
     def produce_report(self):
         pass

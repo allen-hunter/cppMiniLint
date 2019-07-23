@@ -22,6 +22,7 @@ better process cpp, allowing more sophisticated testing
 - Detection of code blocks commented out with #if 0 preprocessor commands
 - Detection of long files
 - Detection of uncopyrighted files
+- Detection of header protection (ie pragma once or ifdefs)
 
 ## RoadMap:
 ### Framework Architecture:
@@ -33,7 +34,6 @@ better process cpp, allowing more sophisticated testing
 - symbol detection within member functions (this is not provided by pygccxml/castxml)
 
 ### Tests:
-- Detection of header protection (ie pragma once or ifdefs)
 - Detection of multiple classes within a single header
 - Detection of large comment blocks within member functions (commented out code)
 - Detection of long functions 
