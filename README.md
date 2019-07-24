@@ -24,6 +24,7 @@ better process cpp, allowing more sophisticated testing
 - Detection of uncopyrighted files
 - Detection of header protection (ie pragma once or ifdefs)
 - Detection of multiple classes within a single header
+- Detection of large classes
 
 ## RoadMap:
 ### Framework Architecture:
@@ -37,7 +38,6 @@ better process cpp, allowing more sophisticated testing
 ### Tests:
 - Detection of large comment blocks within member functions (commented out code)
 - Detection of long functions 
-- Detection of large classes
 - Detection of unsearchable names <sup>1</sup>
 - Detection of symbols that don't have a component in the english language <sup>2</sup>
 - Detection of unused include files
