@@ -9,6 +9,7 @@ from minilint.code_tests.too_long import TooLong
 from minilint.code_tests.no_copyright import NoCopyright
 from minilint.code_tests.header_protection import HeaderProtection
 from minilint.code_tests.multiple_classes import MultipleClasses
+from minilint.code_tests.large_classes import LargeClasses
 
 
 def print_report(parser, file_name):
@@ -25,6 +26,7 @@ def add_tests(parser):
     parser.test_suite.tests_to_run.append(NoCopyright())
     parser.test_suite.tests_to_run.append(HeaderProtection())
     parser.test_suite.tests_to_run.append(MultipleClasses())
+    parser.test_suite.tests_to_run.append(LargeClasses())
 
 # This is the "main"
 # it should:
