@@ -15,8 +15,7 @@ customizeable parsers, and customizeable reporting.*
   dirtiest code most likely to be read by other programmers
 - Full coverage regression testing via unit tests
 
-Current focus will be on improving the parser to use castxml to
-better process cpp, allowing more sophisticated testing
+Future sprints will be alternating between extending tests and framework capabilities
 
 ### Current Tests:
 - Detection of code blocks commented out with #if 0 preprocessor commands
